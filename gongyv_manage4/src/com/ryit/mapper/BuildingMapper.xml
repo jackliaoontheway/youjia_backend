@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryit.mapper.BuildingMapper" >
+
+	<!-- 查询栋数编号、小区名称、栋数、栋数描述 -->
+	<select id="selectAll" resultType="com.ryit.entity.vo.BuildingQueryVo">
+		select b.id,b.pid,p.pname,b.buildingNo,b.description,b.created_user,b.created_datetime,b.updated_user,b.updated_datetime from Building b,plot p where b.pid=p.id
+	</select>
+	
+	<select id="select" resultType="building">
+		select id,pid,buildingNo,description from Building
+	</select>
+	
+	<!-- 模糊查询，指定一个条件，去查询栋数编号、小区名称、栋数、栋数描述 -->
+	<select id="findBuilNo" parameterType="building" resultType="com.ryit.entity.vo.BuildingQueryVo">
+		select b.id,p.pname,b.buildingNo,b.description,b.created_user,b.created_datetime,b.updated_user,b.updated_datetime from plot p,Building b 
+		<where>
+			<if test="pid != null">
+				and b.pid=#{pid} and p.id = b.pid
+			</if>
+			<if test="buildingNo !=''">
+				and b.buildingNo=#{buildingNo} and p.id = b.pid
+			</if>
+			<if test="pid == null">
+				and p.id = b.pid
+			</if>
+		</where>
+		
+	</select>
+	
+	
+	<select id="findIdAndBname" parameterType="int" resultType="building">
+		select id,buildingNo from Building where pid=${value}
+	</select>
+	
+	
+	<select id="findBid" parameterType="building" resultType="int">
+		select id from building where pid=#{pid} and buildingNo=#{buildingNo}
+	</select>
+	
+	
+	
+	<!-- 指定删除栋数的某一条信息 -->
+	<delete id="delete" parameterType="int">
+		delete from Building where id=${value}
+	</delete>
+	
+	<!-- 指定修改栋数的信息 -->
+	<update id="update" parameterType="building">
+		update Building set pid=#{pid},buildingNo=#{buildingNo},description=#{description},updated_user=#{updated_user},updated_datetime=#{updated_datetime} where id=#{id}
+		
+	</update>
+	
+	<!-- 插入数据 -->
+	<insert id="insert" parameterType="Building">
+		insert into Building(pid,buildingNo,description,created_user,created_datetime,updated_user,updated_datetime) value(#{pid},#{buildingNo},#{description},#{created_user},#{created_datetime},#{updated_user},#{updated_datetime})
+	</insert>
+	<select id="findBuildingName" parameterType="renterVo" resultType="building">
+		select * from building where id=#{bid}
+	</select>
+	<select id="findBuilding" parameterType="renterVo" resultType="building">
+		select * from building where pid=#{pid} and buildingNo =#{bname}
+	</select>
+	<select id="findBuildingNamez" parameterType="rentVo" resultType="building">
+		select * from building where id=#{bid}
+	</select>
+	<select id="findBuildingId" parameterType="renterVo" resultType="building">
+		select * from building where pid=#{pid} and buildingNo =#{bname} 
+	</select>
+	
+</mapper>

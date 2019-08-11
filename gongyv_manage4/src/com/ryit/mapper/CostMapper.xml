@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryit.mapper.CostMapper" >
+	
+	<select id="findCost" resultType="Cost">
+		select * from cost;
+	</select>
+	
+	
+	<update id="updateCost" parameterType="cost">
+		
+		update cost set ele_unit_price=#{ele_unit_price},cold_unit_price=#{cold_unit_price},hot_unit_price=#{hot_unit_price},
+		created_user=#{created_user},created_datetime=#{created_datetime},updated_user=#{updated_user},
+		updated_datetime=#{updated_datetime}
+	</update>
+	
+	
+</mapper>

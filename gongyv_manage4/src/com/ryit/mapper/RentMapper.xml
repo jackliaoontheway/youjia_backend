@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ryit.mapper.RentMapper">
+	<insert id="addRent" parameterType="rent">
+		insert into rent
+		(room_num,bid,pid,user,identity_card,cold_water,last_cold_water,hot_water,last_hot_water,
+		electric_fee,last_electric_fee,mgr_fee,net_fee,state,rent_rental,created_user,
+		created_datetime,updated_user,updated_datetime)
+		values(#{room_num},#{bid},#{pid},#{user},#{identity_card},#{cold_water},#{last_cold_water},#{hot_water},#{last_hot_water},#{electric_fee},
+		#{last_electric_fee},#{mgr_fee},#{net_fee},#{state},#{rent_rental},#{created_user},#{created_datetime},#{updated_user},#{updated_datetime})
+	</insert>
+	<select id="getCount" resultType="rent">
+		select * from rent 
+	</select>
+	<select id="queryAll" resultType="rent" parameterType="rentQueryVo">
+		select * from rent order by state,bid,created_datetime limit #{currentPage},#{pageSize}
+	</select>
+	<select id="getCounts" parameterType="rentQueryVo" resultType="rent">
+		select * from rent 
+		<where>
+			<if test="rid !=''">
+				and room_num like '${rid}%'
+			</if>
+			<if test="bid !=''">
+				and bid like '${bid}%'
+			</if>
+			<if test="user != ''">
+				and user like '${user}%'
+			</if>
+			<if test="start_time != null and end_time !=null">
+				and date_format(created_datetime,'%Y-%m-%d') between #{start_time} and #{end_time}
+			</if>
+
+		</where>
+	</select>
+	<select id="queryDate" parameterType="rentQueryVo" resultType="rent">
+		select * from rent 
+		<where>
+			<if test="pid != null">
+				and pid =#{pid}
+			</if>
+			<if test="rid != null">
+				and room_num =#{rid}
+			</if>
+			<if test="bid !=null">
+				and bid =#{bid}
+			</if>
+			<if test="user != '' and user !=null">
+				and user like '${user}%'
+			</if>
+			<if test="state != 0">
+				and state =#{state}
+			</if>
+			<if test="start_time != null and end_time !=null">
+				and date_format(created_datetime,'%Y-%m-%d') between #{start_time} and #{end_time}
+			</if>
+		</where>
+		order by state,bid,created_datetime limit #{currentPage},#{pageSize}
+	</select>
+	<update id="updateRent" parameterType="rent">
+		update rent set cold_water=#{cold_water},hot_water=#{hot_water},electric_fee=#{electric_fee},mgr_fee=#{mgr_fee},
+		net_fee=#{net_fee},state=#{state},rent_rental=#{rent_rental},updated_user=#{updated_user},updated_datetime=#{updated_datetime} where id =#{id}
+	</update>
+	<delete id="deleteRent" parameterType="rent">
+		delete from rent where id=#{id}
+	</delete>
+	<select id="findId" parameterType="int" resultType="rent">
+		select * from rent where id=#{id}
+	</select>
+	<select id="selectDate" parameterType="rent" resultType="rent">
+		select * from rent where  room_num =#{room_num} and bid =#{bid} and date_sub(date_format(created_datetime,'%Y-%m-%d'),interval 1 month) = date_format(#{created_datetime},'%Y-%m-%d')
+	</select>
+	<select id="selectLatelyDate" parameterType="rent" resultType="rent">
+		select * from rent where room_num = #{room_num} and bid =#{bid} and created_datetime &lt; #{created_datetime} order by created_datetime asc limit 0,1
+	</select>
+	
+
+</mapper>

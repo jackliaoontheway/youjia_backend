@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryit.mapper.RenterMapper" >
+	<select id="findId" parameterType="int" resultType="renter">
+		select * from renter where id=#{id}
+	</select>
+	<select id="selectUser" parameterType="rent" resultType="renter">
+		select * from renter where rid=#{room_num} and r_state=2
+	</select>
+	<select id="selectAll" resultType="renter">
+		select * from renter
+	</select>
+	<select id="getAllRecords" parameterType="renterVo" resultType="int"> 
+		select count(*) from renter 
+		<where>
+				<if test="rid !=''">
+					and rid=#{rid}
+				</if>
+				<if test="bid !=''">
+					and bid=#{bid}
+				</if>
+				<if test="r_state != 0">
+					and r_state=#{r_state}
+				</if>
+				<if test="state !=0">
+					and state=#{state}
+				</if>
+				<if test="identity_card !=''">
+					and identity_card like '${identity_card}%'
+				</if>
+		</where>
+	</select>
+	<select id="queryAssigned" parameterType="renterVo" resultType="renterVo">
+		select * from renter
+		<where>
+				<if test="pid != null">
+					and pid=#{pid}
+				</if>
+				<if test="rid != null">
+					and rid=#{rid}
+				</if>
+				<if test=" bid != null">
+					and bid=#{bid}
+				</if>
+				<if test="r_state != 0">
+					and r_state=#{r_state}
+				</if>
+				<if test="state !=0">
+					and state=#{state}
+				</if>
+				<if test="identity_card !='' and identity_card != null">
+					and identity_card like '${identity_card}%'
+				</if>
+		</where>
+		order by r_state,state,bid,created_datetime limit #{currentPage},#{pageSize}
+	</select>
+	<insert id="addRenter" parameterType="renter">
+		insert into renter
+		(user_name,password,name,phone,identity_card,ide_card_pic_z,ide_card_pic_f,
+		self_pic,state,create_user,create_datetime,update_user,update_datetime)
+		values(#{user_name},#{password},#{name},#{phone},#{identity_card},
+		#{ide_card_pic_z},#{ide_card_pic_f},#{self_pic},#{state},
+		#{create_user},#{create_datetime},#{update_user},#{update_datetime})
+	</insert>
+	<update id="updateRenter" parameterType="renterVo">
+		update renter set password=#{password},name=#{name},bid=#{bid},rid=#{rid},pid=#{pid},phone=#{phone},state=#{state},r_state=#{r_state} where id =#{id}
+	</update>
+	<delete id="deleteRenter" parameterType="int">
+		delete from renter where id=#{id}
+	</delete>
+	
+	<select id="getAllRecord" resultType="int">
+		select count(*) from renter 
+	</select>
+		
+	<select id="getAllRenter" resultType="renterVo" parameterType="map">
+		 select * from renter order by r_state,state,bid,created_datetime limit #{currentPage},#{pageSize}
+	</select>
+		
+	<select id="findState" parameterType="renter" resultType="renter">
+		select * from renter where bid=#{bid} and rid=#{rid} and state=2;
+	</select>
+		
+</mapper>

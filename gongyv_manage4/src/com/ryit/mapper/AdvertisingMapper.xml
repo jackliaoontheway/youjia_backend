@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryit.mapper.AdvertisingMapper" >
+
+	
+	<select id="selectAll" resultType="advertising">
+		select * from advertising
+	</select>
+	
+	
+	<delete id="deleteAdvertising" parameterType="int">
+		delete from advertising where id=${value}
+	</delete>
+	
+	
+	<insert id="addAdvertising" parameterType="advertising">
+		insert into advertising(pic_num,pic_url,created_user,created_datetime,updated_user,updated_datetime)
+		values(#{pic_num},#{pic_url},#{created_user},#{created_datetime},#{updated_user},#{updated_datetime})
+	</insert>
+	
+	<select id="getAllRecord" resultType="int">
+		select count(*) from advertising 
+	</select>
+	
+	<select id="getAllAdvertising" resultType="advertising" parameterType="map">
+		 select * from advertising order by created_datetime limit #{currentPage},#{pageSize}
+	</select>
+		
+</mapper>

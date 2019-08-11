@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryit.mapper.PlotMapper" >
+
+	<select id="findPlot" resultMap="plotQueryIdPname" >
+		select id,pname from Plot
+	</select> 
+	
+	<resultMap type="com.ryit.entity.vo.PlotQueryIdPname" id="plotQueryIdPname">
+		<id column="id" property="pid"/>
+		<result column="pname" property="pname"/>
+	</resultMap>
+	
+	<select id="selectAll" resultType="plot">
+		select * from Plot
+	</select>
+	
+	<select id="findPname" parameterType="String" resultType="plot">
+		select *  from Plot where pname like '${value}%';
+	</select>
+	
+	<select id="findId" parameterType="String" resultType="int">
+		select id from Plot where pname=#{pname}
+	</select>
+	
+	<select id="findIdAndPname" resultType="plot">
+		select id,pname from plot
+	</select>
+	
+	<insert id="addPlot" parameterType="plot">
+		insert into Plot(pname,address,description,created_user,created_datetime,updated_user,updated_datetime) value(#{pname},#{address},#{description},#{created_user},#{created_datetime},#{updated_user},#{updated_datetime})
+	</insert>
+	
+	<delete id="deletePlot" parameterType="int">
+		delete from Plot where id=${value}
+	</delete>
+	
+	<update id="updatePlot" parameterType="plot">
+		update plot set pname=#{pname},address=#{address},description=#{description},updated_user=#{updated_user},updated_datetime=#{updated_datetime} where id=#{id}
+	</update>
+	
+	<select id="findPlotName" parameterType="renterVo" resultType="plot">
+		select * from plot where id=#{pid}
+	</select>
+	
+	<select id="findPlots" parameterType="renterVo" resultType="plot">
+		select * from plot where pname=#{pname}
+	</select>
+	
+	<select id="findPlotNamez" parameterType="rentVo" resultType="plot">
+		select * from plot where id=#{pid}
+	</select>
+	
+	<select id="findPlotId" parameterType="renter" resultType="plot">
+		select * from plot where pname=#{pname}
+	</select>
+</mapper>

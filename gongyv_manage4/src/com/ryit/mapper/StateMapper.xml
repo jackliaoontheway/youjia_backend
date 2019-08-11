@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryit.mapper.StateMapper" >
+	
+	<select id="selectPlotState" resultType="plot">
+		select * from plot
+	</select>
+	
+	<select id="selectBuildingState" parameterType="int" resultType="building">
+		select * from building where pid=#{id}
+	</select>
+	
+	<select id="selectRoomstate" parameterType="int" resultType="room">
+		select * from room where bid =#{pid}
+	</select>
+	
+	
+	<select id="selectRoomstates" parameterType="int" resultType="room">
+		select * from room where bid =#{pid} and state=1
+	</select>
+	
+	
+
+	<select id="selectRoomstatex" parameterType="int" resultType="room">
+		select * from room where bid =#{pid} and state=2;
+	</select>
+		
+</mapper>

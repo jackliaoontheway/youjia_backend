@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+/*菜单样式*/
+.main-cont .left-menu{
+    width: 66px;
+    min-height: 865px;
+    margin: 0;
+    float: left;
+    position: absolute;
+    background: #393939;
+}
+
+.left-menu .menu-icon .close{
+    display: inline-block;
+    width: 66px;
+    height: 21px;
+    background: url("../images/menu-close.png") 20px 0 no-repeat transparent;
+}
+
+.left-menu .open-menu{
+    display: none;
+}
+
+.main-cont .right-cont{
+    margin: 0 0 0 66px;
+    background: #FFF;
+}
+
+/*菜单展开*/
+.main-cont .open-menu{
+    width: 280px;
+    height: 100%;
+}
+
+.left-menu .menu-icon .open{
+    width: 280px;
+    background: url("../images/menu-open.png") 235px 0 no-repeat transparent;
+}
+
+.main-cont .fit-open{
+    margin-left: 280px;
+}
+
+.menu-group p{
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    padding-left: 60px;
+    color: #96999D;
+    position: relative;
+    cursor: pointer;
+}
+
+.menu-group .menu-icon{
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    left: 20px;
+    top: 22px;
+}
+
+.menu-group .work-desk{
+    background: url("../images/work-desk.png") 0 0 no-repeat transparent;
+}
+
+.menu-group .normal-order{
+    background: url("../images/normal-order.png") 0 0 no-repeat transparent;
+}
+
+.menu-group .deliver{
+    background: url("../images/deliver.png") 0 0 no-repeat transparent;
+}
+
+.menu-group .user-manage{
+    background: url("../images/user-manage.png") 0 0 no-repeat transparent;
+}
+
+.menu-group .service{
+    background: url("../images/service.png") 0 0 no-repeat transparent;
+}
+
+.menu-group .menu-switch{
+    display: inline-block;
+    width: 20px;
+    height: 15px;
+    position: absolute;
+    right: 20px;
+    top: 21px;
+    background: url("../images/group-open.png") 0 0 no-repeat transparent;
+}
+
+.menu-group .menu-group-item{
+    background: #282823;
+}
+
+.menu-group .active-item{
+    color: #1AB08E;
+}
+
+
+/*顶部右侧信息*/
+.header-logo{
+   position: relative;
+}
+
+.header-logo a, .header-logo span{
+    display: inline-block;
+    color: #1AB08E; /*灰色：color: #A4A4A4*/
+    font-size: 16px;
+}
+
+.header-logo  a.top-help{
+    /*width: 61px;*/
+    height: 77px;
+    line-height: 77px;
+    text-align: right;
+    padding: 0 55px;
+    position: relative;
+    cursor: default;
+    /*background: url("../images/help.png") 55px 30px no-repeat transparent;*/
+}
+
+.header-logo span.bor-l,.header-logo span.bor-r{
+    display: inline-block;
+    width: 10px;
+    height: 77px;
+    position: absolute;
+    background: url("../images/split-borer.png") 0 0 no-repeat transparent;
+}
+
+.header-logo span.bor-l{
+    left: 0;
+}
+
+.header-logo span.bor-r{
+    right: 0;
+}
+
+.top-exit{
+    padding-left: 20px;
+}
+
+

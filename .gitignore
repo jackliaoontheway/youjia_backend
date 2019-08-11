@@ -1,0 +1,8 @@
+*.class
+*.png
+.svn/
+.setting/
+.settings/
+*.classpath
+*.project
+*.jar

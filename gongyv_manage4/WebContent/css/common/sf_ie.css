@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/*修复IE8及以下浏览器兼容性问题*/
+
+.bg{
+    background-position: 0 -1px;
+}
+
+.main-cont .main-check-p{
+    margin: 0 0 10px 0;
+}

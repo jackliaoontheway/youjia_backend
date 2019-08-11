@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS Document */
+
+.main_table {
+	border: 1px solid #e6e8ea;
+	border-right: none;
+	border-bottom: none;
+	margin-top: 10px;
+	font-size: 12px;
+	font-family: 微软雅黑, 宋体, 新宋体, Verdana, Arial, Helvetica, sans-serif;
+	line-height: 1.8em;
+	align:right;
+}
+.main_table th {
+	color: #505866;
+	text-align: right;
+	text-shadow: 0 1px #fff;
+	padding: 5px 10px 5px 10px;
+	height: 24px;
+	border-right: 1px solid #e6e8ea;
+	line-height: 1.2;
+	font-size: 14px;
+	width:100px;
+}
+.main_table th span{
+	color: #dc6504;
+	text-shadow: 0 1px #fff;
+	font-size: 12px;
+}
+.main_table td table td {
+	height: 24px;
+	border-right: 1px solid #e6e8ea;
+	border-bottom: 1px solid #e6e8ea;
+	line-height: 1.5;
+	padding: 3px 5px 3px 5px;
+	color: #505866;
+	width: 60px;
+}
+.main_table td table td.query_td {
+	background: #f0fee7;
+}
+.main_table td table td.font_color {
+	/*color: #dc6504;*/
+	color: #000000;
+	background: #f4f4f4;
+	width: 60px;
+}
+.main_table td table td.background_color {
+	background: #f4f4f4;
+}
+.main_table td table td span.no_padding {
+	padding-left: 0;
+}
+.td_style {
+	text-align:center;
+	background: #F0F5F7;
+}
+.input_length {
+	length:50px;
+}

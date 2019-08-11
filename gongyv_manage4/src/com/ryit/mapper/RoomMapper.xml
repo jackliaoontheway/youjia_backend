@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryit.mapper.RoomMapper" >
+
+	<!-- 查询房间所有的信息 -->
+	<select id="selectAll" resultType="room">
+		select * from room
+	</select>
+	
+
+	<!-- 查询房间的所有信息 ，包括栋数名-->
+	<select id="selectsAll" resultType="com.ryit.entity.vo.RoomQueryAllVo">
+		select p.pname,r.id,r.room_num,r.bid,b.buildingNo,r.money,r.room_type,r.cash_pay,r.mgr_fee,r.state,r.cash_state,r.admin,r.created_user,r.created_datetime,r.updated_user,r.updated_datetime from room r,building b,plot p where r.bid = b.id and p.id = b.pid
+	</select>
+
+
+	<!-- 此sql是页面查询时候的方法 -->
+	<select id="select" parameterType="room" resultType="com.ryit.entity.vo.RoomQueryAllVo">
+		select p.pname,r.id,r.room_num,r.bid,b.buildingNo,r.money,r.room_type,r.cash_pay,r.mgr_fee,r.state,r.cash_state,r.admin,r.created_user,r.created_datetime,r.updated_user,r.updated_datetime from plot p,room r,building b
+		<where>
+			<if test="room_num != ''">
+				and r.bid = b.id and p.id = b.pid and room_num=#{room_num}
+			</if>
+			<if test="room_type!=''">
+				and r.bid = b.id and p.id = b.pid and room_type=#{room_type}
+			</if>
+			<if test="state!=null">
+				and r.bid = b.id and p.id = b.pid and state=#{state}
+			</if>
+			<if test="bid!=''">
+				and r.bid = b.id and p.id = b.pid and bid=#{bid}
+			</if>
+			<if test="bid == ''">
+				and r.bid = b.id and p.id = b.pid
+			</if>
+		</where>
+	</select>
+
+	
+	<!-- 查询房间类型 -->
+	<select id="findRoom_type" resultType="room">
+		select distinct room_type from Room
+	</select>
+	
+	<!-- 查询所有管理员 -->
+	<select id="findByAdmin" resultType="room">
+		select distinct admin from room
+	</select>
+	
+	<!-- 查询所有房号 -->
+	<select id="findByRoom_num" parameterType="Integer" resultType="room">
+		select room_num from room where bid=#{bid}
+	</select>
+	
+	<!-- 通过指定的条件查询房间的所有信息 -->
+	<select id="selectManageFee" parameterType="rent" resultType="room">
+		select * from room where id=#{room_num}
+	</select>
+	
+	<!-- 通过指定栋数、房号指定获取房间信息 -->
+	<select id="findRoomState" parameterType="renter" resultType="room">
+		select * form room where bid=#{bid} and room_num=#{rid}
+	</select>
+	
+	
+	<!-- 通过指定条件删除房间信息 -->
+	<delete id="delete" parameterType="Integer">
+		delete from Room where id=${value}
+	</delete>
+
+	<!-- 插入房间信息 -->
+	<insert id="insert" parameterType="room">
+		insert into room(room_num,bid,money,room_type,cash_pay,mgr_fee,state,cash_state,admin,created_user,created_datetime,updated_user,updated_datetime) value(#{room_num},#{bid},#{money},#{room_type},#{cash_pay},#{mgr_fee},#{state},#{cash_state},#{admin},#{created_user},#{created_datetime},#{updated_user},#{updated_datetime})
+	</insert>
+	
+	<!-- 修改房间信息-->
+	<update id="update" parameterType="room">
+		update room set room_num=#{room_num},bid=#{bid},money=#{money},room_type=#{room_type},cash_pay=#{cash_pay},mgr_fee=#{mgr_fee},state=#{state},cash_state=#{cash_state},admin=#{admin},updated_user=#{updated_user},updated_datetime=#{updated_datetime} where id=#{id}
+	</update>
+	
+	<update id="updateState" parameterType="renterVo">
+		update room set state=#{r_state} where id=#{rid}
+	</update>
+	<select id="findRoomName" parameterType="renterVo" resultType="room">
+		select * from room where id=#{rid} and bid=#{bid}
+	</select>
+	<select id="findRoom" parameterType="renterVo" resultType="room">
+		select * from room where bid=#{bid} and room_num=#{rname}
+	</select>
+	
+	<select id="findRoomNamez" parameterType="rentVo" resultType="room">
+		select * from room where id=#{room_num} and bid=#{bid}
+	</select>
+	<select id="findRoomId" parameterType="renterVo" resultType="room">
+		select * from room where bid=#{bid} and room_num=#{rname}
+	</select>
+	
+</mapper>

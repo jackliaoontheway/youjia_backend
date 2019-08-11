@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryit.mapper.admin.AdminUserMapper" >
+	<!-- 保存 -->
+	<insert id="addAdminUser" parameterType="adminUser" >
+		<!--  配置自增长
+			将插入数据的主键返回,返回到User对象中, order="AFTER"
+			select last_insert_id(): 得到刚insert进去记录的主键值,只适用于自增主键
+			
+			keyProperty: 将查询到主键值设置到parameterType指定的对象的哪个属性
+		-->
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select last_insert_id()
+		</selectKey>
+		insert into t_admin_user(create_time, login_name, name, status) values(NOW(), #{loginName}, #{name}, #{status})
+	</insert>
+	
+	<!-- 删除多个 -->
+	<delete id="delete" parameterType="int">
+		delete from t_admin_user
+		<where>
+			<!-- 引用 sql片段的id,如果 refid指定的id不在本mapper文件中,需要前边加namespace -->
+			 <include refid="queryIn"/>
+		</where>
+	</delete>
+	
+	<sql id="queryIn">
+		<foreach collection="list" item="id" open="and id in(" close=")" separator=",">
+			<!-- 每个遍历需要拼接的串 -->
+			#{id}
+		</foreach>
+	</sql>
+	
+	<!-- 按后台用户名查询 -->
+	<select id="getUserByName" parameterType="string" resultMap="getAdminUser">
+		select id,create_time, login_name, name, status from t_admin_user where login_name = #{loginName}
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="getAllUser" resultMap="getAdminUser">
+		select id,create_time, login_name, name, status from t_admin_user
+	</select>
+	
+	<!-- 根据id查询 -->
+	<select id="getUserById" parameterType="int" resultMap="getAdminUser">
+		select id,create_time, login_name, name, status from t_admin_user where id = #{id}
+	</select>
+	
+	<!-- 查询后台用户是否存在 -->
+	<select id="findUserIsExist" parameterType="adminUser" resultType="int">
+		select id from t_admin_user where login_name = #{loginName}
+	</select>
+	
+	<!-- 查询所有用户信息 -->
+	<select id="findAll" resultMap="getAdminUser">
+		select id,create_time, login_name, name, status from t_admin_user
+	</select>
+	
+	<!-- 用户类 和 用户表映射 -->
+	<resultMap type="adminUser" id="getAdminUser">
+		<id column="id" property="id"/>
+		<result column="login_name" property="loginName"/>
+		<result column="name" property="name"/>
+		<result column="status" property="status"/>
+		<result column="create_time" property="createTime"/>
+	</resultMap>
+	
+	<!-- 查询所有用户关联角色信息 
+		需求: 查询用户及角色名称的信息
+		sql语句:
+			确定主查询表: 用户表
+			确定关联查询表: 角色表
+			
+		加上关联字段 : 角色名 == name;
+	-->
+	<select id="findUserRole" resultMap="adminUserAndAdminRoleResultMap">
+		select u.id,u.create_time,u.login_name,u.name,u.status,
+		r.id as rid,r.name as rname from t_admin_user u,t_admin_role r,t_admin_user_role_mapping ur
+		where u.id = ur.t_admin_user_id and r.id = ur.roles_id
+	</select>
+	
+	<!-- 用户角色映射表 
+		一个用户 拥有多个角色
+	-->
+	<resultMap type="com.ryit.entity.admin.AdminUser" id="adminUserAndAdminRoleResultMap">
+		<!-- 配置映射角色信息 -->
+		<!-- id: 指定查询列中的唯一标识,订单信息 中的唯一标识,如果有多个列组成唯一标识,配置多个id;  
+			column: 角色信息的唯一标识 列;
+			property: 角色信息的唯一标识 列所映射到 Orders类中哪个属性
+		-->
+		<id column="id" property="id"/>
+		<result column="login_name" property="loginName"/>
+		<result column="name" property="name"/>
+		<result column="status" property="status"/>
+		<result column="create_time" property="createTime"/>
+		
+		
+		<!-- 如果查询的 用户表 字段 与 角色表 字段有部分相同, 在查询语句中使用 “as” 区分: r.id as rid,r.name as rname -->
+		<collection property="roles" ofType="adminRole">
+			<id column="rid" property="id"/>
+			<result column="rname" property="name"/>
+		</collection>
+		
+	</resultMap>
+	
+	<!-- 修改 -->
+	<update id="editUser" parameterType="adminUser">
+		update t_admin_user set login_name = #{loginName},name=#{name},create_time = NOW(),
+		status =#{status} where id = #{id}
+	</update>
+	
+	
+	<!-- 删除指定id的 用户角色列表 -->
+	<delete id="deleteAdminUserRoleMapping" parameterType="int">
+		delete from t_admin_user_role_mapping where t_admin_user_id = #{id};
+	</delete>
+	
+	<!-- 增加 用户角色映射表  -->
+	<insert id="addAdminUserRoleMapping" parameterType="adminUserRoleMapping" >
+        insert into t_admin_user_role_mapping
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="t_admin_user_id != null" >
+                t_admin_user_id,
+            </if>
+            <if test="roles_id != null" >
+                roles_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="t_admin_user_id != null" >
+                #{t_admin_user_id},
+            </if>
+            <if test="roles_id != null" >
+                #{roles_id},
+            </if>
+        </trim>
+    </insert>
+    
+    
+    <!-- 分页查询 -->
+	<select id="getAllAdminUser" parameterType="map" resultMap="getAdminUser" >
+		select id,create_time, login_name, name, status from t_admin_user order by id limit
+		#{currentPage},#{pageSize}
+	</select>
+	
+	<!-- 查询所有用户记录 -->
+	<select id="getAllRecord" resultType="int">
+		select count(*) from t_admin_user 
+	</select>
+
+</mapper>

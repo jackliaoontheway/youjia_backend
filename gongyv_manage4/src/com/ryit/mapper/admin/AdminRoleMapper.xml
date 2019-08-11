@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryit.mapper.admin.AdminRoleMapper" >
+	<!-- 保存 -->
+	<insert id="addRole" parameterType="adminRole">
+		<!--  配置自增长
+			将插入数据的主键返回,返回到User对象中, order="AFTER"
+			select last_insert_id(): 得到刚insert进去记录的主键值,只适用于自增主键
+			
+			keyProperty: 将查询到主键值设置到parameterType指定的对象的哪个属性
+		-->
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select last_insert_id()
+		</selectKey>
+		insert into t_admin_role (create_time,creater,name,remark,update_time,updater) 
+		values (NOW(),#{creater},#{name},#{remark},NOW(),#{updater})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="editRole" parameterType="adminRole">
+		update t_admin_role set name = #{name},remark=#{remark},update_time = NOW(),
+		updater=#{updater} where id = #{id}
+	</update>
+	
+	
+	<!-- 批量增加 角色菜单映射表 -->
+	<!-- <insert id="addAdminRoleMenuList" parameterType="list" >
+		 insert into t_admin_role_menu_mapping
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="t_admin_role_id != null" >
+                t_admin_role_id,
+            </if>
+            <if test="menus_id != null" >
+                menus_id,
+            </if>
+        </trim>
+        values
+        <foreach collection="list" item="adminRoleMenuMapping" index="index" separator=",">
+        	(
+        	#{adminRoleMenuMapping.t_admin_role_id},
+        	#{adminRoleMenuMapping.menus_id}
+        	)
+        </foreach>
+	</insert> -->
+	
+	<!-- 删除指定id的 角色菜单列表 -->
+	<delete id="deleteAdminRoleMenuMapping" parameterType="int">
+		delete from t_admin_role_menu_mapping where t_admin_role_id = #{id};
+	</delete>
+	
+	<!-- 增加 角色 菜单映射表  -->
+	<insert id="addAdminRoleMenuMapping" parameterType="adminRoleMenuMapping" >
+        insert into t_admin_role_menu_mapping
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="t_admin_role_id != null" >
+                t_admin_role_id,
+            </if>
+            <if test="menus_id != null" >
+                menus_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="t_admin_role_id != null" >
+                #{t_admin_role_id},
+            </if>
+            <if test="menus_id != null" >
+                #{menus_id},
+            </if>
+        </trim>
+    </insert>
+	
+	
+	<!-- 按id查询 -->
+	<select id="getByID" parameterType="int" resultMap="getAdminRole">
+		select id,create_time,creater,name,remark,update_time,updater from t_admin_role where id=#{id}
+	</select>
+	
+	<!-- 查询所有角色信息 -->
+	<select id="findAll"  resultMap="getAdminRole">
+		select id,create_time,creater,name,remark,update_time,updater from t_admin_role
+	</select>
+	
+	<!-- 角色类 和 角色表映射 -->
+	<resultMap type="com.ryit.entity.admin.AdminRole" id="getAdminRole">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="remark" property="remark"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="creater" property="creater"/>
+		<result column="updater" property="updater"/>
+	</resultMap>
+	
+	
+	<!-- 查询所有角色关联菜单的信息 
+		需求: 查询角色及菜单名称的信息
+		sql语句:
+			确定主查询表: 角色表
+			确定关联查询表: 菜单表
+			
+		加上关联字段 : 菜单名称 == menu;
+	-->
+	<select id="findRoleMenu" resultMap="adminRoleAndAdminMeneResultMap">
+		select r.id,r.create_time,r.creater,r.name,r.remark,r.update_time,r.updater,
+		m.id as mid,m.name as menu from t_admin_role r,t_admin_menu m,t_admin_role_menu_mapping rm
+		where r.id = rm.t_admin_role_id and m.id = rm.menus_id
+	</select>
+	
+	<!-- 角色菜单映射表 
+		一个角色 有多个菜单的功能
+	-->
+	<resultMap type="com.ryit.entity.admin.AdminRole" id="adminRoleAndAdminMeneResultMap">
+		<!-- 配置映射角色信息 -->
+		<!-- id: 指定查询列中的唯一标识,订单信息 中的唯一标识,如果有多个列组成唯一标识,配置多个id;  
+			column: 角色信息的唯一标识 列;
+			property: 角色信息的唯一标识 列所映射到 Orders类中哪个属性
+		-->
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="remark" property="remark"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="creater" property="creater"/>
+		<result column="updater" property="updater"/>
+		
+		<!-- 如果查询的 角色表 字段 与 菜单表 字段有部分相同, 在查询语句中使用 “as” 区分: m.id as mid,m.name as menu -->
+		<collection property="menus" ofType="adminMenu">
+			<id column="mid" property="id"/>
+			<result column="menu" property="name"/>
+		</collection>
+		
+	</resultMap>
+	
+	
+	
+	
+	<!-- 查询指定多个id的角色 -->
+	<select id="getRoleByIds" parameterType="list" resultMap="getAdminRole">
+		select id,create_time,creater,name,remark,update_time,updater from t_admin_role
+		<where>
+			<!-- 引用 sql片段的id,如果 refid指定的id不在本mapper文件中,需要前边加namespace -->
+			 <include refid="queryIn"/>
+		</where>
+	</select>
+	
+	<sql id="queryIn">
+		<foreach collection="list" item="id" open="and id in(" close=")" separator=",">
+			<!-- 每个遍历需要拼接的串 -->
+			#{id}
+		</foreach>
+	</sql>
+	
+	
+	<!-- 分页查询 -->
+	<select id="getAllAdminRole" parameterType="map" resultMap="getAdminRole" >
+		select id,create_time,creater,name,remark,update_time,updater from t_admin_role order by id limit
+		#{currentPage},#{pageSize}
+	</select>
+	
+	<!-- 查询所有角色记录 -->
+	<select id="getAllRecord" resultType="int">
+		select count(*) from t_admin_role 
+	</select>
+	
+	
+	<!-- 根据用户 id 查询出所对应的角色列表 -->
+	<select id="getUserIdByRole" parameterType="int" resultMap="getAdminRole">
+		select r.id,r.create_time,r.creater,r.name,r.remark,r.update_time,r.updater 
+		from t_admin_role r,t_admin_user_role_mapping ur 
+		where #{id} = ur.t_admin_user_id and r.id = ur.roles_id
+	</select>
+	
+	
+</mapper>

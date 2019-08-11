@@ -1,0 +1,45 @@
+/*页面控件激活态样式*/
+
+/*登陆页输入框*/
+.main-cont .login-form .count-input-a{
+    background-position: 0 0;
+}
+
+.main-cont .login-form .passwd-input-a {
+    background-position: 0 -136px;
+}
+
+/*注册页输入框*/
+.main-cont .register-form p.input-a,.main-cont .passwd-form p.input-a{
+    background-position: -337px 0;
+}
+.main-cont .register-form p.vcode-p-a{
+    background-position: 0 0;
+}
+
+/*登陆，获取验证码，下一步按钮点击态*/
+.main-cont a.submit-login:active,
+.main-cont a.to-next:active,
+.main-cont a.get-vcode:active,
+.verify-success a.success-login:active,
+.passwd-email a.login-email:active,
+.passwd-tel a.passwd-next:active,
+.passwd-form a.to-submit:active{
+    border: 1px solid #48FEAE;
+    box-sizing: border-box;
+}
+
+/*服务协议选择状态*/
+.main-cont .checkbox-a{
+    background-position: 0 0;
+}
+
+/*注册导航状态*/
+.nav-bar li.nav-step-2-a{
+    background-position: 0 -83px;
+}
+
+.nav-bar li.nav-step-3-a{
+    background-position: 0 -166px;
+}
+

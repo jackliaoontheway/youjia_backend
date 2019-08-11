@@ -1,0 +1,867 @@
+@charset "UTF-8";
+
+/*用户信息*/
+body{
+   height: 100%;
+}
+
+.header-logo{
+    position: relative;
+    background: #393939;
+}
+
+.header-logo .logo-div{
+    margin: 0 30px;
+}
+
+.logo-img{
+    background: url("../images/inner-logo.png") 0 0 no-repeat transparent;
+}
+
+/*内容区域*/
+.main-cont{
+ /*   background: #393939;*/
+    height: 100%;
+}
+
+.right-cont .nav-title{
+    height: 40px;
+    line-height: 40px;
+    padding-left: 30px;
+    color: #393939;
+    font-size: 16px;
+    background: #AAA;
+}
+
+.right-cont .main-title{
+    height: 40px;
+    line-height: 40px;
+    padding: 25px 0 35px 30px;
+    color: #231815;
+    font-size: 24px;
+}
+
+.right-cont .user-info{
+    padding-left: 30px;
+    height: 150px;
+}
+
+.right-cont .user-info-img{
+    width: 131px;
+    height: 133px;
+    display: inline-block;
+    float: left;
+    background: url("../images/user-d-img.png") 0 0 no-repeat transparent;
+}
+
+.right-cont .user-login{
+    margin-left: 160px;
+}
+
+.right-cont .wel{
+    font-size: 24px;
+    color: #1AB08E;
+}
+
+.right-cont .login-info{
+    color: #231815;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.right-cont .month-count,.right-cont .service{
+    padding-left: 30px;
+}
+
+.right-cont .count-title{
+    color: #231815;
+    font-size: 24px;
+}
+
+.right-cont .count-num{
+    color: #1AB08E;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+.right-cont .service{
+    margin-top: 35px;
+}
+
+.right-cont .items{
+    height: 10px;
+}
+
+.right-cont .items li{
+    width: 130px;
+    height: 130px;
+    float: left;
+    list-style: none;
+    color: #1AB08E;
+    font-size: 24px;
+    text-align: center;
+    line-height: 130px;
+    margin: 20px 18px 0 0;
+    background: url("../images/service-item.png") 0 0 no-repeat transparent;
+}
+
+/*新增包裹*/
+.right-cont div{
+    position: relative;
+}
+.right-cont .action{
+    height: 40px;
+    margin-left: 20px;
+    z-index: 9999;
+}
+
+.right-cont .action .left{
+    width: 620px;
+    height: 46px;
+}
+
+.right-cont .chk-a{
+    display: inline-block;
+    width: 101px;
+    height: 46px;
+    color: #231815;
+    text-align: center;
+    line-height: 46px;
+    font-weight: bold;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    position: relative;
+    /*background: url("../images/check-box.png") 0 0 no-repeat transparent;*/
+}
+
+.right-cont .order-input{
+    width: 280px;
+    height: 43px;
+    line-height: 43px;
+    margin-left: 20px;
+    text-indent: .5em;
+    border: 1px solid #CCC;
+    outline: none;
+}
+
+.right-cont .query-a{
+    display: inline-block;
+    width: 111px;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    color: #FFF;
+    font-size: 16px;
+    margin-left: 20px;
+    font-weight: bold;
+    background: url("../images/btn-bg.png") 0 0 no-repeat transparent;
+}
+
+.right-cont .right{
+    min-width: 946px;
+    height: 38px;
+    margin: 20px 0 0;
+}
+
+.right-cont .right a{
+    display: inline-block;
+    width: 113px;
+    height: 46px;
+    line-height: 46px;
+    text-indent: 3em;
+    font-size: 18px;
+    color: #393939;
+    margin-left: 20px;
+}
+
+.right-cont .export{
+    background: url("/portal/images/bg1.png") 0 0 no-repeat transparent;
+}
+
+.right-cont .modify{
+    background: url("/portal/images/bg2.png") 0 0 no-repeat transparent;
+}
+
+.right-cont .del{
+    background: url("/portal/images/bg5.png") 0 0 no-repeat transparent;
+}
+
+.right-cont .print{
+    background: url("/portal/images/bg3.png") 0 0 no-repeat transparent;
+}
+
+.right-cont .add{
+    background: url("/portal/images/bg7.png") 0 0 no-repeat transparent;
+}
+
+.right-cont .confirm{
+    background: url("/portal/images/bg6.png") 0 0 no-repeat transparent;
+}
+
+.right-cont .import{
+    background: url("/portal/images/bg8.png") 0 0 no-repeat transparent;
+}
+
+.right-cont .conds{
+    /*width: 630px;*/
+    height: 38px;
+    line-height: 38px;
+    background: #F5F8FA;
+    font-size: 16px;
+    margin: 75px 10px 0 20px;
+}
+
+.conds li{
+    list-style: none;
+    float: left;
+}
+
+.right-cont .conds a{
+    display: inline-block;
+    width: 126px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    color: #96999D;
+    border-radius: 1px;
+}
+
+.right-cont a.actived,.right-cont .conds a:hover{
+   /*  background: #AAA; */
+    /*border-bottom: 3px solid #1AB08E;*/
+    color: #393939;
+    font-weight: bold;
+}
+
+/*调整操作按钮的位置*/
+.right-cont .resp-left{
+    float: left;
+}
+
+.right-cont .resp-right{
+    width:960px;
+    float: left;
+    margin: 20px 5px 0 0;
+}
+
+.right-cont .resp-mp{
+    margin-top: 70px;
+}
+
+.right-cont .create-order-resp{
+    margin-top: 70px;
+}
+
+/*订单表格*/
+.right-cont .order-items,.layer-tab .order-items,.right-cont .page-num{
+    margin: 20px 10px 0 20px;
+}
+
+.right-cont .order-items .order-tab,.layer-tab .order-items .order-tab{
+    width: 100%;
+    text-align: center;
+}
+
+.right-cont .order-tab th,.layer-tab .order-tab th,.right-cont .order-tab td,.layer-tab .order-tab td{
+    height: 35px;
+    padding: 3px 5px;
+    font-size: 14px;
+    color: #231815;
+    border: 1px solid #CCC;
+}
+
+.right-cont .order-tab th,.layer-tab .order-tab th{
+    background: #F0F5F7;
+}
+
+.right-cont .order-tab td,.layer-tab .order-tab td{
+    text-indent: .3em;
+}
+
+.right-cont .order-tab td.wl-td,.layer-tab .order-tab td.wl-td{
+    line-height: 20px;
+}
+
+.right-cont .order-tab tr.bg-tr,.layer-tab .order-tab tr.bg-tr{
+    background: #F5F8FA;
+}
+.right-cont td.color-active{
+    color: #1AB08E;
+}
+
+/*分页信息*/
+.right-cont .page-num{
+    height: 38px;
+    line-height:38px;
+    margin-top: 20px;
+    color: #231815;
+    font-size: 16px;
+}
+
+.right-cont .to-page{
+    float: right;
+}
+
+.right-cont span.total, .right-cont span.cur-page{
+    color: #1AB08E;
+    padding: 0 8px;
+}
+
+.right-cont .to-page a{
+    display: inline-block;
+    width: 37px;
+/*     height: 31px; */
+    text-align: center;
+    color: #1AB08E;
+    line-height: 31px;
+}
+
+.to-page a.prev{
+    height: 34px;
+    background: url("../images/prev.png") 0 0 no-repeat transparent;
+}
+
+.to-page a.page-other{
+  /*  background: url("../images/page-other.png") 0 0 no-repeat transparent;*/
+   border: 1px solid #CFCFCF;
+}
+
+.to-page li a.page-cur{
+  /*  background: url("../images/page-cur.png") 0 0 no-repeat transparent;*/
+    /*border: 1px solid #CFCFCF;*/
+    background: #F5F5F5;
+    color: #393939;
+}
+.to-page a.page-next{
+    height: 34px;
+    background: url("../images/next.png") 0 0 no-repeat transparent;
+}
+
+.right-cont .to-page li{
+    list-style: none;
+    float: left;
+   /*  border: 1px solid #CFCFCF; */
+}
+
+.right-cont li.fix-bor{
+    border-left: 0;
+}
+
+/*页面缩小时调整表格字体大小*/
+.right-cont .resp-tab td{
+    font-size: 12px;
+}
+
+/*创建订单页*/
+.create-order{
+    margin: 20px 10px 20px 20px;
+}
+
+.create-order .weight{
+    color: #D03136;
+}
+
+.create-order .basic-info{
+    min-height: 251px;
+    border-radius: 5px;
+}
+
+.create-order .title{
+    height: 30px;
+    line-height: 30px;
+    padding-left: 15px;
+    color: #393939;
+    font-size: 13px;
+    position: relative;
+    background: #ACACAC;
+}
+
+.basic-info .basic-part1,.basic-info .basic-part2,.basic-info .basic-part3,.basic-info .basic-part4,.basic-info .basic-part5,.basic-info .basic-part6{
+    padding: 10px 15px;
+    font-size: 13px;
+  /*  border: 1px solid #E6E6E6;*/
+    background: #F0F0F0;
+    border-radius: 6px;
+}
+
+.basic-info .abl_li{
+    list-style: none;
+    float: left;
+    position: relative;
+    width: 200px;
+    height: 60px;
+}
+
+.basic-info .abs_li{
+    list-style: none;
+    float: left;
+    position: relative;
+    width: 100px;
+    height: 60px;
+}
+
+.basic-info span{
+    display: inline-block;
+    width: 150px;
+    height: 27px;
+    line-height: 27px;
+    padding: 0 5px;
+}
+
+.basic-info .abl-input{
+    width: 150px;
+    height: 20px;
+    line-height: 25px;
+    padding: 0 5px;
+    border: 1px solid #CCC;
+    outline: none;
+}
+
+.basic-info .abs-input{
+    width: 60px;
+    height: 20px;
+    line-height: 25px;
+    padding: 0 5px;
+    border: 1px solid #CCC;
+    outline: none;
+}
+
+.basic-info .addr-input{
+    width: 200px;
+    height: 20px;
+    line-height: 25px;
+    padding: 0 5px;
+    border: 1px solid #CCC;
+    outline: none;
+}
+
+.basic-info .fix-m-1{
+   margin-left: 0;
+}
+
+.basic-info .fix-m-2{
+    margin-right: 60px;
+}
+
+.basic-info span.dis-span{
+    background: #DDD;
+}
+
+.basic-info span.abl-span{
+    width: 150px;
+    background: #FFF;
+}
+
+.basic-info .chk-btn{
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+    background: url("../images/order-btn-3.png") 0 0 no-repeat transparent;
+}
+
+.basic-info .info-title{
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    color: #231815;
+    text-indent: .3em;
+}
+
+.basic-info .chk-btn, .basic-info .option-val{
+    position: absolute;
+}
+
+.basic-info .chk-btn{
+    top: 25px;
+    right: 12px;
+}
+
+.basic-info .option-val,.left .query-opt{
+    width: 160px;
+    padding: 3px 0 3px;
+    text-indent: .1em;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    background: #FFF;
+    top: 55px;
+    z-index: 1001;
+}
+
+.basic-info .opt-addr{
+    width: 100px;
+}
+
+.left .query-opt{
+    display: none;
+    width: 100px;
+    position: absolute;
+    top: 38px;
+    font-size: 13px;
+}
+
+.basic-info .option-val p,.left .option-val p{
+    height: 30px;
+    line-height: 30px;
+    padding: 0 3px;
+    cursor: pointer;
+}
+
+.basic-info .option-val p:hover,.left .option-val p:hover{
+    background: #FAFAFA;
+}
+
+.basic-info .chked-a, .basic-info .unchked-a,.other-service .chked-a{
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin-top: 8px;
+}
+
+.basic-info .chked-a,.other-service .chked-a{
+    background: url("../images/order-btn-4.png") 0 0 no-repeat transparent;
+}
+.basic-info .unchked-a,.other-service .unchked-a{
+    background: url("../images/order-btn-5.png") 0 0 no-repeat transparent;
+}
+
+.basic-info span.fix-w{
+    width: 90px;
+    background: #FFF;
+}
+
+.basic-info .fix-m-4{
+    margin-right: 25px;
+}
+
+.basic-info a.choose-a{
+    display: inline-block;
+    width: 82px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 13px;
+    color: #FFF;
+    margin-top: 25px;
+    background: url("../images/order-btn-1.png") 0 0 no-repeat transparent;
+}
+
+.basic-info a.choose-a:hover{
+    border: 1px solid #48FEAE;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.service-part p{
+    float: left;
+    width: 200px;
+}
+
+/*页面表格宽度调整*/
+.order-tab .w-td{
+    width: 5%;
+    min-width: 40px;
+}
+
+.right-cont .fix-m-3{
+    margin-top: 90px;
+}
+
+.right-cont .fix-m-2-1{
+    margin-right: 50px;
+}
+
+.right-cont .addr-left{
+    left: 101px;
+}
+
+/*订单提交按钮*/
+.create-btn{
+    text-align: center;
+}
+.right-cont .create-btn，.right-cont .layer-btn{
+    height: 50px;
+    margin: 10px 10px 10px 30px;
+    text-align: center;
+}
+
+.right-cont a.save-btn,.layer-btn a.save-btn,.right-cont a.reset-btn,.layer-btn a.reset-btn{
+    display: inline-block;
+    width: 171px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    border-radius: 4px;
+    color: #FFF;
+}
+
+.right-cont a.save-btn,.layer-btn a.save-btn{
+   	background: url("../images/order-btn-9.png") 0 0 no-repeat transparent;
+    border:1px solid #1AB08E;
+    background: #1AB08E;
+    margin-right: 40px;
+}
+.right-cont a.reset-btn,.layer-btn a.reset-btn{
+ 	background: url("../images/order-btn-2.png") 0 0 no-repeat transparent;
+    border:1px solid #ACACAC;
+    background: #ACACAC;
+    margin-right: 40px;
+}
+
+.right-cont a.new-addr{
+    display: inline-block;
+    width: 96px;
+    height: 24px;
+    line-height: 24px;
+    color: #393939;font-size: 14px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    padding-left: 26px;
+    background: url("../images/order-btn-6.png") 0 1px no-repeat transparent;
+}
+
+.right-cont a.new-addr:hover{
+   color: #000;
+}
+
+/*.right-cont a.save-btn:active{
+    border: 1px solid #48FEAE;
+    box-sizing: border-box;
+}*/
+
+/*样式调整*/
+.right-cont .tab-item{
+    margin-top: 20px;
+}
+
+.nav-title span.tab-close{
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    position: absolute;
+    top: 5px;
+    right: 1px;
+    cursor: pointer;
+    z-index: 1000;
+    background: url(../images/tabspage_icon.png) 0 0 no-repeat transparent;
+}
+.nav-title span.tab-close:hover{
+    background-position: -0.5px -50.5px;
+}
+
+/*在设计稿的基础上进行适配*/
+.right-cont .action .left{
+    height: 36px;
+    position: relative;
+}
+
+.right-cont .chk-a{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.right-cont .order-input {
+    height: 30px;
+    line-height: 30px;
+}
+
+.right-cont .query-a{
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    margin-left: 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    border: 1px solid #1AB08E;
+    background: #1AB08E;
+}
+
+.right-cont a.query-a:hover{
+    border: 1px solid #48FEAE;
+}
+
+.right-cont a.chk-icon{
+    display: inline-block;
+    width: 21px;
+    height: 20px;
+    background: url("../images/chk_icon.png") 0 10px no-repeat transparent;
+    position: absolute;
+    right: -5px;
+    top: 2px;
+}
+
+.right-cont .right a{
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    position: relative;
+}
+
+.right-cont .right .icon_1,
+.right-cont .right .icon_2,
+.right-cont .right .icon_3,
+.right-cont .right .icon_4,
+.right-cont .right .icon_5,
+.right-cont .right .icon_6,
+.right-cont .right .icon_7{
+    position: absolute;
+    left: 10px;
+    top: 4px;
+}
+
+.right-cont .export,
+.right-cont .modify,
+.right-cont .del,
+.right-cont .print,
+.right-cont .add,
+.right-cont .confirm,
+.right-cont .import{
+    background: #F5F8F9;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+}
+.right-cont .export:hover,
+.right-cont .modify:hover,
+.right-cont .del:hover,
+.right-cont .print:hover,
+.right-cont .add:hover,
+.right-cont .confirm:hover,
+.right-cont .import:hover{
+    border: 1px solid #ACACAC;
+    color: #000;
+}
+
+.right-cont .spe{
+    border: 1px solid #1AB08E;
+}
+.right-cont a.save-btn:hover{
+    border-color: #48FEAE;
+}
+.right-cont a.reset-btn:hover{
+    border-color: #F0F0F0;
+}
+
+/*弹出遮盖层*/
+.layer{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: #CCC;
+    opacity: .5;
+    -webkit-opacity: 0.5;
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    filter:alpha(opacity=50);
+    z-index: 10001;
+}
+
+.layer-title{
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px;
+    background: #ACACAC;
+}
+
+.cont{
+    display: none;
+    width: 960px;
+    height: 520px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -260px 0 0 -480px;
+    background: #F0F0F0;
+    z-index: 99999;
+}
+
+.layer-btn{
+    margin: 20px 0;
+    text-align: center;
+}
+
+/*弹窗商品列表*/
+.goods-find{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 27px;
+    right: 37px;
+    background: url("../images/chosen-sprite.png") -40px -20px no-repeat transparent;
+}
+
+/*保存商品信息表格*/
+.goodsInfoTr tr.active{
+    background: #F5F8FA;
+}
+.layer-del{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+   /* background: url("../images/close.png")  0 0px no-repeat transparent;*/
+    position: absolute;
+    top: 8px;
+    right: 5px;
+}
+
+ .n-width{width: 150px;}
+ .s-width{width: 80px;}
+ .ReadTxt{ 
+ 	background-color:#DDD; 
+ 	border-style:none; 
+ 	width: 150px;
+    height: 20px;
+    line-height: 25px;
+    padding: 0 5px;
+    border: 1px solid #CCC;
+    outline: none;
+ }
+  .ReadLongTxt{
+ 	background-color:#DDD; 
+ 	border-style:none; 
+ 	width: 300px;
+    height: 20px;
+    line-height: 25px;
+    padding: 0 5px;
+    border: 1px solid #CCC;
+    outline: none;
+ }
+ 
+ .bottom_btn {
+	background: #1AB08E;
+	height: 35px;
+	line-height: 25px;
+	width: 100%;
+	zoom: 1;
+	position: fixed;
+	z-index: 30;
+	bottom: 0;
+	left: 0;
+	_position: absolute;
+	_bottom: auto;
+	_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight));
+	/*padding-left: 100px;  */
+	text-align: center;
+}
+.bottom_btn li {
+	display: inline;
+	height: 25px;
+	line-height: 25px;
+	text-align: center; 
+	padding-left: 10px;  
+}
+
+
+
+
+
+ 
+ 
+ 
+ 

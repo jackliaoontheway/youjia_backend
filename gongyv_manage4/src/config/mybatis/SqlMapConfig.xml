@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 开启二级缓存 -->
+	<settings>
+		<!-- log4j配置,为了把sql打印出来看是否走了缓存 -->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	<!-- 配置别名 -->
+	<typeAliases>
+		<package name="com.ryit.entity"></package>
+	</typeAliases>
+</configuration>
+
+
+
+	
