@@ -3,13 +3,17 @@ package com.ryit.mapper;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.ryit.entity.Rent;
 import com.ryit.entity.Renter;
 import com.ryit.entity.vo.RenterVo;
 
 public interface RenterMapper {
+	
+	/**该方法用来根据传入的参数查询对应的id并返回
+	 * @param id
+	 * @return
+	 */
+	public Renter findByLoginName(String loginName);
 	
 	/**该方法用来根据传入的参数查询对应的id并返回
 	 * @param id

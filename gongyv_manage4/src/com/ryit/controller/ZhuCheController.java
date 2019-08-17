@@ -33,7 +33,7 @@ public class ZhuCheController {
 		renter.setState(1);
 		renter.setR_state(1);
 		
-		renterService.addRenter(renter, files);
+		renterService.addRenter(renter, files,true);
 		
 	}
 	

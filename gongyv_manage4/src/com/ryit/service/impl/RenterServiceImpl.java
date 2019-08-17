@@ -37,9 +37,14 @@ public class RenterServiceImpl implements RenterService{
 	@Autowired
 	private PlotMapper plotMapper;
 	
-
+	private final static String FILE_PATH = "F:\\Pic\\card\\";
 	
 	private int count;
+	
+	public Renter findByLoginName(String loginName) {
+		return renterMapper.findByLoginName(loginName);
+	}
+	
 	/**该方法用来根据传入的参数查询对应的id并返回
 	 * @param id  integer 
 	 * @return Renter
@@ -71,28 +76,29 @@ public class RenterServiceImpl implements RenterService{
 		return list;
 	}
 
-
+	@Override
+	public Boolean register(Renter renter,MultipartFile[] files) {
+		addRenter(renter,files,false);
+		return true;
+	}
 
 	/**该方法用向数据库添加租户的数据
 	  * @param Renter renter
 	 * @return String
 	 */
-	public String addRenter(Renter renter,MultipartFile[] files) {
-		if(UserSession.getAdminUser().getLoginName() == null) {
+	public String addRenter(Renter renter,MultipartFile[] files,boolean isAdmin) {
+		if(isAdmin && UserSession.getAdminUser().getLoginName() == null) {
 			return "你的身份验证已失效，请重新登录......";
 		}
-		String filePath = "F:\\Pic\\card\\";
-		renter.setCreated_user(UserSession.getAdminUser().getLoginName());
+		String filePath = "D:\\temp\\card\\";
+		renter.setCreated_user(renter.getIdentity_card());
 		renter.setCreated_datetime(new Date());
-		renter.setUpdated_user(UserSession.getAdminUser().getLoginName());
+		renter.setUpdated_user(renter.getIdentity_card());
 		renter.setUpdated_datetime(new Date());	
-		List<Renter> list = renterMapper.selectAll();
-		for(int i=0,j=list.size();i<j;i++) {
-			if(renter.getId() !=  list.get(i).getId() && renter.getUser_name().equals(list.get(i).getUser_name())) {
-				return "该用户名已存在！！！";
-			}
+		Renter dbRenter = renterMapper.findByLoginName(renter.getPhone());
+		if(dbRenter != null) {
+			return "User existed";
 		}
-		
 		if(files.length != 0){
 			for(int a = 0;a<files.length;a++){
 				MultipartFile mf = files[a];

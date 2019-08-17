@@ -2,6 +2,8 @@ package com.ryit.entity;
 
 import java.util.Date;
 
+import org.springframework.util.DigestUtils;
+
 //租户管理
 public class Renter extends AdstractEntity{
 	private Integer id;//租户编号
@@ -227,6 +229,9 @@ public class Renter extends AdstractEntity{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	public boolean matchPassword(String password) {
+		return this.password.equals(DigestUtils.md5DigestAsHex(password.getBytes()));
+	}
 	
 }

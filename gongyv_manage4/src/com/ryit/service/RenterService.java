@@ -17,6 +17,12 @@ public interface RenterService {
 	 * @param id
 	 * @return
 	 */
+	public Renter findByLoginName(String loginName);
+	
+	/**该方法用来根据传入的参数查询对应的id并返回
+	 * @param id
+	 * @return
+	 */
 	public Renter findId(Integer id);
 
 	/**该方法用来查询所有的在数据库的租户信息,将数据添加至List集合并返回
@@ -33,7 +39,7 @@ public interface RenterService {
 	 * @param renter
 	 * @return
 	 */
-	public String addRenter(Renter renter,MultipartFile[] files);
+	public String addRenter(Renter renter,MultipartFile[] files,boolean isAdmin);
 	/** 该方法用来对用户的信息进行修改
 	 * @param renter
 	 * @return
@@ -70,4 +76,6 @@ public interface RenterService {
 	public String showPicZ(int id);
 	public String showPicF(int id);
 	public String showPicB(int id);
+	
+	Boolean register(Renter renter,MultipartFile[] files);
 }
